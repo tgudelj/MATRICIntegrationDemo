@@ -6,7 +6,9 @@ MATRIC (https://matricapp.com) can be used as an input device (controlling PC ap
 Integration API enables 3rd party applications to use MATRIC as an output device. Perhaps it is best illustrated by use-case example:
 Let's say we have a flight simulator game, and we are using MATRIC as a virtual cockpit button board. But what if we want to reflect the game state to MATRIC, e.g. we want to indicate remaining fuel or low fuel warning. We can do that using Integration API to push changes to MATRIC deck from our flight sim, e.g. we will change the fuel button text to indicate remaining  fuel and maybe set its color to red if the fuel is low.
 
-Integration API uses simple JSON text commands which 3rd party app sends via UDP to matric server (default port for Integration API is 50300 and it always listens on loopback address 127.0.0.1)
+## API Basics
+
+Integration API uses simple JSON text commands which 3rd party app sends via UDP to matric server (default port for Integration API is 50300 and it always listens on loopback address 127.0.0.1).
 
 ## How to use the demo
 Prerequisites:
