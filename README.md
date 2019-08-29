@@ -26,7 +26,8 @@ Prerequisites:
 
 ### GETCONNECTEDCLIENTS
 
-Returns a list of connected clients. 
+Returns a list of connected clients.
+
 Example request:
 
 `{
@@ -48,6 +49,7 @@ Example response:
 ### SETDECK
 
 Instructs the client (specified by clientId) to load deck (specified by deckId) and (optionally) switch to page in deck (specified by pageId).
+
 Example request:
 
 `{
@@ -62,7 +64,9 @@ Example request:
 ### SETACTIVEPAGE
 
 Instructs the client to switch to page specified by pageId.
+
 Example request:
+
 `{
   "command":"SETACTIVEPAGE", 
   "appName":"Integration demo", 
@@ -72,6 +76,7 @@ Example request:
 }`
 
 ### SETBUTTONPROPS
+
 Example request:
 
 `{
