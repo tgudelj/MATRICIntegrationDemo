@@ -30,21 +30,21 @@ Returns a list of connected clients.
 
 Example request:
 
-`{
+```{
   "command":"GETCONNECTEDCLIENTS",
   "appName":"Integration demo",
   "appPIN":"0186"
-}`
+}```
 
 Example response:
 
-`[
+```[
   {"Name":"Joe's Galaxy S10",
     "IP":"192.168.8.45",
     "Id":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVXX60KV71XPpIJA=",
     "MatricVersion":2,
     "LastContact":"2019-08-29T15:28:38.1185368+02:00"}
-]`
+]```
 
 ### SETDECK
 
@@ -52,14 +52,14 @@ Instructs the client (specified by clientId) to load deck (specified by deckId) 
 
 Example request:
 
-`{
+```{
   "command":"SETDECK", 
   "appName":"Integration demo", 
   "appPIN":"0186", 
   "clientId":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVXX60KV71XPpIJA=", 
   "deckId":"7f18056c-7a2a-46ac-9956-662e7d0b78ec",
   "pageId":"00d9c649-f2df-405f-abfd-06d38f8626be"
-}`
+}```
 
 ### SETACTIVEPAGE
 
@@ -67,19 +67,19 @@ Instructs the client to switch to page specified by pageId.
 
 Example request:
 
-`{
+```{
   "command":"SETACTIVEPAGE", 
   "appName":"Integration demo", 
   "appPIN":"0186", 
   "clientId":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVXX60KV71XPpIJA=", 
   "pageId":"00d9c649-f2df-405f-abfd-06d38f8626be"
-}`
+}```
 
 ### SETBUTTONPROPS
 
 Example request:
 
-`{
+```{
   "command":"SETBUTTONPROPS", 
   "appName":"Integration demo", 
   "appPIN":"0186", 
@@ -95,7 +95,7 @@ Example request:
           "fontSize":null,
           "text":null
       }
-}`
+}```
 
 Modifies the properties of a button specified by buttonId. Note that you can change button visual properties but not it's function. This is behaviour by design. Note also that changes are not persisted, integration commands does not alter the button definition in deck on MATRIC server (PC)
 
