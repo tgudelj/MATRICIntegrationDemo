@@ -93,7 +93,7 @@ Example request:
   "command":"SETBUTTONPROPS", 
   "appName":"Integration demo", 
   "appPIN":"0186", 
-  "clientId":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVE860KV71XPpIJA=", 
+  "clientId":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVXX60KV71XPpIJA=", 
   "buttonId":"cf3cd93c-e43c-4649-9f47-5441555ca7ce",
       "data":{
           "imageOff": null, 
