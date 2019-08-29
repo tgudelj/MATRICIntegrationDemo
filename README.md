@@ -20,7 +20,7 @@ Prerequisites:
 ![Authorization popup](/res/authorize-app-popup.png)
 
 4) Click Yes and type the PIN into demo console
-
+![Enter PIN in demo app console](/rs/demo-enter-pin.png)
 5) The demo will run switching the deck on the first connected client to demo deck and dynamically changing button visuals. The demo is not ment to illustrate any programming best practices, insted it is made to be as simple and minimalistic as possible.
 
 ## Integration API commands
