@@ -1,7 +1,7 @@
 # MATRIC Integration API Demo
 This project is a simple demo of MATRIC integration API
 
-MATRIC (https://matricapp.com) can be used as input device (controlling PC applications from Smartphone or tablet) by emulating keyboard and mouse, but it also provides Integration API and can be used to display data from 3rd party applications.
+MATRIC (https://matricapp.com) can be used as an input device (controlling PC applications from smartphone or tablet) by emulating keyboard and mouse, but can also be used to display data from 3rd party applications by utilizing Integration API.
 
 Integration API enables 3rd party applications to use MATRIC as an output device. Perhaps it is best illustrated by use-case example:
 Let's say we have a flight simulator game, and we are using MATRIC as a virtual cockpit button board. But what if we want to reflect the game state to MATRIC, e.g. we want to indicate remaining fuel or low fuel warning. We can do that using Integration API to push changes to MATRIC deck from our flight sim, e.g. we will change the fuel button text to indicate remaining  fuel and maybe set its color to red if the fuel is low.
