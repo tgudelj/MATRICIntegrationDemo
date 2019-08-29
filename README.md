@@ -1,4 +1,4 @@
-# MATRICIntegrationDemo
+# MATRIC Integration API Demo
 This project is a simple demo of MATRIC integration API
 
 MATRIC can be used as input device (controlling PC applications from Smartphone or tablet) by emulating keyboard and mouse, but it also provides Integration API and can be used to display data from 3rd party applications.
