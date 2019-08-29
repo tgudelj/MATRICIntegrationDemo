@@ -28,6 +28,7 @@ Prerequisites:
 
 Returns a list of connected clients. 
 Example request:
+
 `{
   "command":"GETCONNECTEDCLIENTS",
   "appName":"Integration demo",
@@ -35,6 +36,7 @@ Example request:
 }`
 
 Example response:
+
 `[
   {"Name":"Joe's Galaxy S10",
     "IP":"192.168.8.45",
@@ -47,6 +49,7 @@ Example response:
 
 Instructs the client (specified by clientId) to load deck (specified by deckId) and (optionally) switch to page in deck (specified by pageId).
 Example request:
+
 `{
   "command":"SETDECK", 
   "appName":"Integration demo", 
@@ -60,10 +63,17 @@ Example request:
 
 Instructs the client to switch to page specified by pageId.
 Example request:
-``
+`{
+  "command":"SETACTIVEPAGE", 
+  "appName":"Integration demo", 
+  "appPIN":"0186", 
+  "clientId":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVXX60KV71XPpIJA=", 
+  "pageId":"00d9c649-f2df-405f-abfd-06d38f8626be"
+}`
 
 ### SETBUTTONPROPS
 Example request:
+
 `{
   "command":"SETBUTTONPROPS", 
   "appName":"Integration demo", 
