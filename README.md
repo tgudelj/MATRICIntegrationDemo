@@ -28,6 +28,8 @@ Prerequisites:
 
 Triggers authorization popup on PC. User will be prompted to allow access to Integration API to 3rd party application and shown a PIN number which must be entered into 3rd party application. Typically you'd do this only once and save the PIN.
 
+Example request:
+
 ```
 {
   "command":"CONNECT",
