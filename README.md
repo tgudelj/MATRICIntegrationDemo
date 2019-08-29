@@ -16,11 +16,11 @@ Prerequisites:
 ## Running the integration demo
 1) Start MATRIC, connect with smartphone/tablet
 2) Start demo
-3) MATRIC will popup a messsage similar to this one
+3) MATRIC will display a popup messsage similar to this one:
 
 ![Authorization popup](/res/authorize-app-popup.png)
 
-4) Click Yes and type the PIN into demo console
+4) Click Yes on the MATRIC popup and then type the PIN into demo console:
 
 ![Enter PIN in demo app console](/res/demo-enter-pin.png)
 
