@@ -84,7 +84,7 @@ Example request:
 ```
 
 ### SETBUTTONPROPS
-
+Modifies the properties of a button specified by buttonId. Note that you can change button visual properties but not it's function. This is behaviour by design. Note also that changes are not persisted, integration commands does not alter the button definition in deck on MATRIC server (PC)
 Example request:
 
 ```
@@ -106,6 +106,4 @@ Example request:
       }
 }
 ```
-
-Modifies the properties of a button specified by buttonId. Note that you can change button visual properties but not it's function. This is behaviour by design. Note also that changes are not persisted, integration commands does not alter the button definition in deck on MATRIC server (PC)
 
