@@ -8,10 +8,12 @@ namespace IntegrationDemo {
 
     class Program {
         public static string DEMO_DECK_ID = "7f18056c-7a2a-46ac-9956-662e7d0b78ec";
+        public static string SMILE_WINK = "😉";
         //Deck pages
         static class DemoPages {
             public static string SEMAPHORE = "00d9c649-f2df-405f-abfd-06d38f8626be";
             public static string SHIELDS_AND_WEAPONS = "16856457-d2f8-405e-927e-749b1dc7d7ec";
+            public static string DEMO_COMPLETE = "b0a0b559-9e2c-42af-9c64-95951ef09cbd";
         }
         // Button id's in our demo deck that we want to control
         static class DemoButtons {
@@ -21,6 +23,7 @@ namespace IntegrationDemo {
             public static string SHIELDS_CRITICAL = "2aadc834-56f7-49e7-93d0-e047f772e7f9";
             public static string SHIELDS_PERCENT = "9ec833c2-dd31-40a8-b919-ca332fb97b51";
             public static string AMMO_COUNT = "ef59a421-e820-49e2-b223-b0efa9c95555";
+            public static string WINK_BUTTON = "9ddd4517-a464-4573-89ef-d9807a2d09de";
         }
 
 
@@ -94,6 +97,10 @@ namespace IntegrationDemo {
                 criticalOn = !criticalOn;
                 Thread.Sleep(400);
             }
+
+            mtrx.SetActivePage(CLIENT_ID, DemoPages.DEMO_COMPLETE);
+            Thread.Sleep(1000);
+            mtrx.SetButtonProperties(CLIENT_ID, DemoButtons.WINK_BUTTON, text: SMILE_WINK);
             Console.WriteLine("Demo complete");
 
         }
