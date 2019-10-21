@@ -127,3 +127,38 @@ Example request:
 }
 ```
 
+### SETBUTTONPROPSEX
+Modifies the properties of multiple buttons. Note that you can change button visual properties but not it's function. This is behaviour by design. Note also that changes are not persisted, integration commands does not alter the button definition in deck on MATRIC server (PC).
+
+IMPORTANT: This method is available in version 1.22 and higher!
+
+Example request:
+```
+{
+     "appName": "MATRIC4DCS",
+      "appPin": "9087",
+    "clientId": "twQd9g6COnWeT7SPaInvcTk2xdvBW7lN8+b+a9QQRfk=",
+     "command": "SETBUTTONPROPSEX",
+        "data": [ {
+                        "buttonId": "7eec29e4-1f59-47d2-bdd5-9b599d375fc9",
+                        "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
+                    "textcolorOff": "white"
+                }, {
+                        "buttonId": "a2c7da77-5f28-4c37-8cdb-e34f9451c9ad",
+                        "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
+                    "textcolorOff": "white"
+                }, {
+                        "buttonId": "404e46c7-8b8e-48dd-89dd-276a408fcf4b",
+                        "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
+                    "textcolorOff": "white"
+                }, {
+                        "buttonId": "d6c9836c-7986-48bc-b4a8-1cb52407bb5d",
+                        "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
+                    "textcolorOff": "white"
+                }, {
+                        "buttonId": "2dee5490-bc3e-4c48-a6d2-144f37800993",
+                        "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
+                    "textcolorOff": "white"
+                } ]
+
+```
