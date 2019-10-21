@@ -160,5 +160,6 @@ Example request:
                         "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
                     "textcolorOff": "white"
                 } ]
+}
 
 ```
