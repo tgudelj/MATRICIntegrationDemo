@@ -162,4 +162,31 @@ Example request:
                 } ]
 }
 
+### SETBUTTONSVISUALSTATE
+Sets the visual state of multiple buttons defined by their ids. It sets predefined properties defined in MATRIC editor for "on" (pressed) and "off" (not pressed). It is easier to use then SETBUTTONPROPS and SETBUTTONPROPSEX as you do not need to define all the properties in the command but instead just set the state to on or off.
+
+IMPORTANT: This method is available in version 1.26 and higher!
+
+Example request:
+```
+{
+     "appName": "MATRIC4DCS",
+      "appPin": "9087",
+    "clientId": "twQd9g6COnWeT7SPaInvcTk2xdvBW7lN8+b+a9QQRfk=",
+     "command": "SETBUTTONSVISUALSTATE",
+        "data": [ {
+                        "buttonId": "7eec29e4-1f59-47d2-bdd5-9b599d375fc9",
+                        "state": "on"
+                }, {
+                        "buttonId": "a2c7da77-5f28-4c37-8cdb-e34f9451c9ad",
+                        "state": off"
+                }, {
+                        "buttonId": "404e46c7-8b8e-48dd-89dd-276a408fcf4b",
+                        "state": "off"
+                }, {
+                        "buttonId": "d6c9836c-7986-48bc-b4a8-1cb52407bb5d",
+                        "state": "on"
+                }]
+}
+
 ```
