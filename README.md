@@ -161,6 +161,7 @@ Example request:
                     "textcolorOff": "white"
                 } ]
 }
+```
 
 ### SETBUTTONSVISUALSTATE
 Sets the visual state of multiple buttons defined by their ids. It sets predefined properties defined in MATRIC editor for "on" (pressed) and "off" (not pressed). It is easier to use then SETBUTTONPROPS and SETBUTTONPROPSEX as you do not need to define all the properties in the command but instead just set the state to on or off.
