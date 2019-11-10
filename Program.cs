@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Threading;
+using static IntegrationDemo.MatricIntegration;
 
 namespace IntegrationDemo {
 
@@ -51,6 +53,39 @@ namespace IntegrationDemo {
 
             mtrx.SetDeck(CLIENT_ID, DEMO_DECK_ID, DemoPages.SEMAPHORE);
             Thread.Sleep(800);
+
+            List<VisualStateItem> listOn = new List<VisualStateItem>();
+            listOn.Add(new VisualStateItem(DemoButtons.SEMAPHORE_GREEN, "on"));
+            listOn.Add(new VisualStateItem(DemoButtons.SEMAPHORE_YELLOW, "on"));
+            listOn.Add(new VisualStateItem(DemoButtons.SEMAPHORE_RED, "on"));
+
+            List<VisualStateItem> listOff = new List<VisualStateItem>();
+            listOff.Add(new VisualStateItem(DemoButtons.SEMAPHORE_GREEN, "off"));
+            listOff.Add(new VisualStateItem(DemoButtons.SEMAPHORE_YELLOW, "off"));
+            listOff.Add(new VisualStateItem(DemoButtons.SEMAPHORE_RED, "off"));
+
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
+            Thread.Sleep(300);
+            mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
+
+
+
             mtrx.SetButtonProperties(CLIENT_ID, DemoButtons.SEMAPHORE_GREEN, backgroundcolorOff: GREEN);
             Thread.Sleep(800);
             mtrx.SetButtonProperties(CLIENT_ID, DemoButtons.SEMAPHORE_GREEN, backgroundcolorOff: GRAY);
@@ -60,6 +95,7 @@ namespace IntegrationDemo {
             mtrx.SetButtonProperties(CLIENT_ID, DemoButtons.SEMAPHORE_YELLOW, backgroundcolorOff: GRAY);
             mtrx.SetButtonProperties(CLIENT_ID, DemoButtons.SEMAPHORE_RED, backgroundcolorOff: RED);
             Thread.Sleep(1000);
+
             mtrx.SetActivePage(CLIENT_ID, DemoPages.SHIELDS_AND_WEAPONS);
             Thread.Sleep(1500);
             //simulate battle

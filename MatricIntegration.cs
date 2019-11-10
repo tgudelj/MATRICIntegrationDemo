@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -117,6 +118,40 @@ namespace IntegrationDemo {
                 ""clientId"":""{clientId}"", 
                 ""deckId"":""{deckId}"",
                 ""pageId"":""{pageId}""}}
+            ";
+            UDPSend(msg);
+        }
+
+
+        public class VisualStateItem {
+            public string buttonId;
+            public string state;
+
+            public VisualStateItem(string buttonId, string state)
+            {
+                this.buttonId = buttonId;
+                this.state = state;
+            }
+        }
+
+        public void SetButtonsVisualState(string clientId, List<VisualStateItem> list) {
+            string btnList = "";
+
+            for (int i = 0; i < list.Count; i++) {
+                VisualStateItem item = list[i];
+                if (i != 0) {
+                    btnList += ",";
+                }
+                btnList += $@"{{""buttonId"":""{ item.buttonId}"", ""state"":""{item.state}""}}";
+            }
+
+            string msg = $@"
+            {{""command"":""SETBUTTONSVISUALSTATE"", 
+                ""appName"":""{APP_NAME}"", 
+                ""appPIN"":""{Program.PIN}"", 
+                ""clientId"":""{clientId}"", 
+                ""data"":[{btnList}]
+            }}
             ";
             UDPSend(msg);
         }
