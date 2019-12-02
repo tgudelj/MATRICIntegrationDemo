@@ -63,8 +63,9 @@ namespace IntegrationDemo {
         /// <param name="fontSize">Button relative font size - string: small, medium, large, xlarge, xxlarge, xxxlarge</param>
         /// <param name="imageOn">Button image in pressed state</param>
         /// <param name="imageOff">Button image in normal state</param>
+        /// <param name="buttonName">Button name (preferred way to reference buttons, rather then by id)</param>
         public void SetButtonProperties(string clientId, string buttonId, string text = null, string textcolorOn = null, string textcolorOff = null,  
-            string backgroundcolorOff = null, string backgroundcolorOn = null, string imageOn = null, string imageOff = null, string fontSize = null)
+            string backgroundcolorOff = null, string backgroundcolorOn = null, string imageOn = null, string imageOff = null, string fontSize = null, string buttonName = null)
         {
             //Remark: if we do not want to change a particular property, we will send it as null
             string msg = $@"
@@ -73,6 +74,7 @@ namespace IntegrationDemo {
                 ""appPIN"":""{Program.PIN}"", 
                 ""clientId"":""{clientId}"", 
                 ""buttonId"":""{buttonId}"",
+                ""buttonName"": ""{buttonName}"",
                     ""data"":{{
                         ""imageOff"": { (imageOff == null ? "null" : "\"" + imageOff + "\"") }, 
                         ""imageOn"":  { (imageOn == null ? "null" : "\"" + imageOff + "\"") }, 
@@ -125,12 +127,14 @@ namespace IntegrationDemo {
 
         public class VisualStateItem {
             public string buttonId;
+            public string buttonName;
             public string state;
 
-            public VisualStateItem(string buttonId, string state)
+            public VisualStateItem(string buttonId, string state, string buttonName = null)
             {
                 this.buttonId = buttonId;
                 this.state = state;
+                this.buttonName = buttonName;
             }
         }
 
@@ -142,7 +146,7 @@ namespace IntegrationDemo {
                 if (i != 0) {
                     btnList += ",";
                 }
-                btnList += $@"{{""buttonId"":""{ item.buttonId}"", ""state"":""{item.state}""}}";
+                btnList += $@"{{""buttonId"":""{ item.buttonId}"", ""buttonName"": ""{item.buttonName}"", ""state"":""{item.state}""}}";
             }
 
             string msg = $@"

@@ -55,14 +55,15 @@ namespace IntegrationDemo {
             Thread.Sleep(800);
 
             List<VisualStateItem> listOn = new List<VisualStateItem>();
-            listOn.Add(new VisualStateItem(DemoButtons.SEMAPHORE_GREEN, "on"));
-            listOn.Add(new VisualStateItem(DemoButtons.SEMAPHORE_YELLOW, "on"));
-            listOn.Add(new VisualStateItem(DemoButtons.SEMAPHORE_RED, "on"));
+            //we will refer to the buttons by name rather then id
+            listOn.Add(new VisualStateItem(null, "on", buttonName: "BTN_GREEN"));
+            listOn.Add(new VisualStateItem(null, "on", buttonName: "BTN_YELLOW"));
+            listOn.Add(new VisualStateItem(null, "on", buttonName: "BRN_RED"));
 
             List<VisualStateItem> listOff = new List<VisualStateItem>();
-            listOff.Add(new VisualStateItem(DemoButtons.SEMAPHORE_GREEN, "off"));
-            listOff.Add(new VisualStateItem(DemoButtons.SEMAPHORE_YELLOW, "off"));
-            listOff.Add(new VisualStateItem(DemoButtons.SEMAPHORE_RED, "off"));
+            listOff.Add(new VisualStateItem(null, "off", buttonName: "BTN_GREEN"));
+            listOff.Add(new VisualStateItem(null, "off", buttonName: "BTN_YELLOW"));
+            listOff.Add(new VisualStateItem(null, "off", buttonName: "BTN_RED"));
 
             mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
             Thread.Sleep(300);
