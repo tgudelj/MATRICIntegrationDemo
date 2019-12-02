@@ -103,7 +103,7 @@ Example request:
 ```
 
 ### SETBUTTONPROPS
-Modifies the properties of a button specified by buttonId. Note that you can change button visual properties but not it's function. This is behaviour by design. Note also that changes are not persisted, integration commands does not alter the button definition in deck on MATRIC server (PC).
+Modifies the properties of a button specified by buttonId or buttonName. Note that you can change button visual properties but not it's function. This is behaviour by design. Note also that changes are not persisted, integration commands does not alter the button definition in deck on MATRIC server (PC).
 
 Example request:
 
@@ -114,6 +114,7 @@ Example request:
   "appPIN":"0186", 
   "clientId":"iQyGDYxja7Zm2yuLt9MJ9Yld+aQCVXX60KV71XPpIJA=", 
   "buttonId":"cf3cd93c-e43c-4649-9f47-5441555ca7ce",
+  "buttonName":"BIG_RED_BUTTON",
       "data":{
           "imageOff": null, 
           "imageOn":  null, 
@@ -144,7 +145,7 @@ Example request:
                         "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
                     "textcolorOff": "white"
                 }, {
-                        "buttonId": "a2c7da77-5f28-4c37-8cdb-e34f9451c9ad",
+                        "buttonName": "BIG_RED_ONE",
                         "imageOff": "8e7b4b9f-3e18-4009-bae1-445b1f3aa81f.png",
                     "textcolorOff": "white"
                 }, {
@@ -164,7 +165,7 @@ Example request:
 ```
 
 ### SETBUTTONSVISUALSTATE
-Sets the visual state of multiple buttons defined by their ids. It sets predefined properties defined in MATRIC editor for "on" (pressed) and "off" (not pressed). It is easier to use then SETBUTTONPROPS and SETBUTTONPROPSEX as you do not need to define all the properties in the command but instead just set the state to on or off.
+Sets the visual state of multiple buttons defined by their ids or names. It sets predefined properties defined in MATRIC editor for "on" (pressed) and "off" (not pressed). It is easier to use then SETBUTTONPROPS and SETBUTTONPROPSEX as you do not need to define all the properties in the command but instead just set the state to on or off.
 
 IMPORTANT: This method is available in version 1.26 and higher!
 
@@ -179,7 +180,7 @@ Example request:
                         "buttonId": "7eec29e4-1f59-47d2-bdd5-9b599d375fc9",
                         "state": "on"
                 }, {
-                        "buttonId": "a2c7da77-5f28-4c37-8cdb-e34f9451c9ad",
+                        "buttonName": "BIG_RED_ONE",
                         "state": off"
                 }, {
                         "buttonId": "404e46c7-8b8e-48dd-89dd-276a408fcf4b",
