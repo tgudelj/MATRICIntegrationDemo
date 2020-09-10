@@ -192,10 +192,8 @@ Example request:
                         "state": "on"
                 }]
 }
-
+```
 ## Integration API .Net wrapper
 
 .Net wrapper is made to make integration with .Net applications easier, please refer to [C# demo](demos/net_wrapper).
 A more detailed reference will be available soon.
-
-```
