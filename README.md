@@ -10,6 +10,8 @@ Let's say we have a flight simulator game, and we are using MATRIC as a virtual 
 
 Integration API uses simple JSON text commands which 3rd party app sends via UDP to matric server (default port for Integration API is 50300 and it always listens on loopback address 127.0.0.1).
 
+c# API wrapper is also available to make things easier
+
 ## How to use the demo
 Prerequisites:
 - Enable integration API by editing <Your user profile folder>/Documents/.matric/config.json, set "EnableIntegrationAPI" to **true**
@@ -26,9 +28,9 @@ Prerequisites:
 
 ![Enter PIN in demo app console](/res/demo-enter-pin.png)
 
-5) The demo will run switching the deck on the first connected client to demo deck and dynamically changing button visuals. The demo is not ment to illustrate any programming best practices, insted it is made to be as simple and minimalistic as possible.
+5) The demos will run switching the deck on the first connected client to demo deck and dynamically changing button visuals. The demo is not ment to illustrate any programming best practices, instead it is made to be as simple and minimalistic as possible.
 
-## Integration API commands
+## Integration API commands (if you do not want to use the convenient .Net wrapper)
 
 ### CONNECT
 
@@ -190,5 +192,10 @@ Example request:
                         "state": "on"
                 }]
 }
+
+## Integration API .Net wrapper
+
+.Net wrapper is made to make integration with .Net applications easier, please refer to [C# demo](demos/net_wrapper).
+A more detailed reference will be available soon.
 
 ```

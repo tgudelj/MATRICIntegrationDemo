@@ -11,7 +11,7 @@ namespace IntegrationDemo {
         IPEndPoint serverEP = new IPEndPoint(IPAddress.Loopback, API_PORT);
         public static int API_PORT = 50300;
         public static int UDP_LISTENER_PORT = 50301;
-        private string APP_NAME = "Integration demo";
+        private string APP_NAME = "MATRIC Integration Demo";
 
         public MatricIntegration() {
             udpClient = new UdpClient(UDP_LISTENER_PORT);
