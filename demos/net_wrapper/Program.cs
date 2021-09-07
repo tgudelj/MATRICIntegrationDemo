@@ -74,8 +74,23 @@ namespace IntegrationDemo {
             matric.SetButtonProperties(CLIENT_ID, backgroundcolorOff: GRAY, buttonName: "BTN_GREEN");
             matric.SetButtonProperties(CLIENT_ID, backgroundcolorOff: GRAY, buttonName: "BTN_YELLOW");
             matric.SetButtonProperties(CLIENT_ID, backgroundcolorOff: RED, buttonName: "BTN_RED");
-            Thread.Sleep(1000);
+            Thread.Sleep(800);
 
+            matric.SetButtonPropertiesEx(null, new List<SetButtonPropsArgsEx> { 
+                new SetButtonPropsArgsEx
+                {
+                    text="RED!!!", ButtonName = "BTN_RED"
+                },
+                new SetButtonPropsArgsEx
+                {
+                    text="YELLOW!!!", ButtonName = "BTN_YELLOW"
+                },
+                new SetButtonPropsArgsEx
+                {
+                    text="GREEN!!!", ButtonName = "BTN_GREEN"
+                }
+            });
+            Thread.Sleep(2000);
             matric.SetActivePage(CLIENT_ID, DemoPages.SHIELDS_AND_WEAPONS);
             Thread.Sleep(1500);
             //simulate battle
