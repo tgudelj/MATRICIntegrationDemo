@@ -32,6 +32,15 @@ Prerequisites:
 
 ## Integration API commands (if you do not want to use the convenient .Net wrapper)
 
+### Common properties
+
+| Property  | Type |  |
+|---|---|---|
+| command | string | The command we want to execute (see below)  |
+| appName | string | The name to identify the app sending the integration commands |
+| appPIN | string | PIN assigned to app sending the integration commands |
+| clientId | string | client Id of the client we want to target. If set to null commands will be sent to all connected clients |
+
 ### CONNECT
 
 Triggers authorization popup on PC. User will be prompted to allow access to Integration API to 3rd party application and shown a PIN number which must be entered into 3rd party application. Typically you'd do this only once and save the PIN.
@@ -193,6 +202,38 @@ Example request:
                 }]
 }
 ```
+
+### SETCONTROLSSTATE
+Sets the state of multiple controls defined by their ids or names. 
+State object depends on control type:
+for buttons : {pressed: boolean}
+for sliders: {value: number}
+for rotary: {pressed: boolean, value: number}
+for rotary encoder: {pressed: boolean}
+
+IMPORTANT: This method is available in version 2.0 and higher!
+
+Example request:
+```
+{
+     "appName": "MATRIC4DCS",
+      "appPin": "9087",
+    "clientId": "twQd9g6COnWeT7SPaInvcTk2xdvBW7lN8+b+a9QQRfk=",
+     "command": "SETCONTROLSSTATE",
+        "data": [ {
+                        "controlId": "7eec29e4-1f59-47d2-bdd5-9b599d375fc9",
+                        "state": {pressed: true}
+                }, {
+                        "controlName": "SOME_SLIDER",
+                        "state": { value: 50}
+                }, {
+                        "controlName": "SOME_ROTARY",
+                        "state": { pressed: true, value: 30}
+                }]
+}
+```
+
+
 ## Integration API .Net wrapper
 
 .Net wrapper is made to make integration with .Net applications easier, please refer to [C# demo](demos/net_wrapper).

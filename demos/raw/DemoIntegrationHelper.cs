@@ -5,15 +5,15 @@ using System.Net.Sockets;
 using System.Text;
 
 namespace IntegrationDemo {
-    public class MatricIntegration {
+    public class DemoIntegrationHelper {
 
         UdpClient udpClient;
         IPEndPoint serverEP = new IPEndPoint(IPAddress.Loopback, API_PORT);
-        public static int API_PORT = 50300;
+        public static int API_PORT = CONST.API_PORT;
         public static int UDP_LISTENER_PORT = 50301;
-        private string APP_NAME = "MATRIC Integration Demo";
+        private string APP_NAME = CONST.APP_NAME;
 
-        public MatricIntegration() {
+        public DemoIntegrationHelper() {
             udpClient = new UdpClient(UDP_LISTENER_PORT);
             udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
         }
@@ -64,8 +64,8 @@ namespace IntegrationDemo {
         /// <param name="imageOn">Button image in pressed state</param>
         /// <param name="imageOff">Button image in normal state</param>
         /// <param name="buttonName">Button name (preferred way to reference buttons, rather then by id)</param>
-        public void SetButtonProperties(string clientId, string buttonId, string text = null, string textcolorOn = null, string textcolorOff = null,  
-            string backgroundcolorOff = null, string backgroundcolorOn = null, string imageOn = null, string imageOff = null, string fontSize = null, string buttonName = null)
+        public void SetButtonProperties(string clientId, string buttonName, string text = null, string textcolorOn = null, string textcolorOff = null,  
+            string backgroundcolorOff = null, string backgroundcolorOn = null, string imageOn = null, string imageOff = null, string fontSize = null, string buttonId = null)
         {
             //Remark: if we do not want to change a particular property, we will send it as null
             string msg = $@"
@@ -124,6 +124,19 @@ namespace IntegrationDemo {
             UDPSend(msg);
         }
 
+        public class SetControlStateItem
+        {
+            public string controlId;
+            public string controlName;
+            public string state;
+
+            public SetControlStateItem(string _controlId, string state, string _controlName = null)
+            {
+                this.controlId = _controlId;
+                this.state = state;
+                this.controlName = _controlName;
+            }
+        }
 
         public class VisualStateItem {
             public string buttonId;
@@ -155,6 +168,31 @@ namespace IntegrationDemo {
                 ""appPIN"":""{Program.PIN}"", 
                 ""clientId"":""{clientId}"", 
                 ""data"":[{btnList}]
+            }}
+            ";
+            UDPSend(msg);
+        }
+
+        public void SetControlsState(string clientId, List<SetControlStateItem> list)
+        {
+            string ctlList = "";
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                SetControlStateItem item = list[i];
+                if (i != 0)
+                {
+                    ctlList += ",";
+                }
+                ctlList += $@"{{""controlId"":""{ item.controlId}"", ""controlName"": ""{item.controlName}"", ""state"":{item.state}}}";
+            }
+
+            string msg = $@"
+            {{""command"":""SETCONTROLSSTATE"", 
+                ""appName"":""{APP_NAME}"", 
+                ""appPIN"":""{Program.PIN}"", 
+                ""clientId"":""{clientId}"", 
+                ""data"":[{ctlList}]
             }}
             ";
             UDPSend(msg);
