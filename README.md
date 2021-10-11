@@ -232,7 +232,14 @@ Example request:
                 }]
 }
 ```
-
+State object depends on the control type, given in the table below:
+| Control | State object example| Description |
+|---------|--------------|-------------|
+|Button         |      {pressed: true }        | pressed: set button state to pressed or "normal"             |
+|Slider         |          {value: 50}    |             | value: - integer (0-100) which determines the slider position
+|Rotary         |        {pressed: true, value: 50}      |    pressed: set button state to pressed or "normal"   value: - integer (0-100) which determines the slider position      |
+|Multi position switch         |   {position: 2}           | position: integer specifying switch position. Note position starts from 1             |
+|Encoder| {pressed: true} | pressed: set button state to pressed or "normal" |
 
 ## Integration API .Net wrapper
 
