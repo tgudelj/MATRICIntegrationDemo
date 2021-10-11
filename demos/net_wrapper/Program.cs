@@ -93,6 +93,12 @@ namespace IntegrationDemo {
             Thread.Sleep(2000);
             matric.SetActivePage(CLIENT_ID, DemoPages.SHIELDS_AND_WEAPONS);
             Thread.Sleep(1500);
+            matric.SetControlsState(null, new List<SetControlsStateArgs> {
+                    new SetControlsStateArgs
+                    {
+                        ControlId=null, ControlName="MULTI_POS_5", State = new { position = 5}
+                    }
+                    });
             //simulate battle
             int ammo = 500;
             int shields = 100;
@@ -105,11 +111,23 @@ namespace IntegrationDemo {
                 });
                 if (shields < 30)
                 {
+                    matric.SetControlsState(null, new List<SetControlsStateArgs> {
+                    new SetControlsStateArgs
+                    {
+                        ControlId=null, ControlName="MULTI_POS_5", State = new { position = 3}
+                    }
+                    });
                     matric.SetButtonProperties(CLIENT_ID, buttonName:"SHIELDS_CRITICAL", textcolorOff: BLACK, backgroundcolorOff: RED);
                     matric.SetButtonProperties(CLIENT_ID, buttonName:"SHIELDS_PERCENT", backgroundcolorOff: GRAY, textcolorOff: RED, text: $@"{shields}%");
                 }
                 else if (shields < 50)
                 {
+                    matric.SetControlsState(null, new List<SetControlsStateArgs> {
+                    new SetControlsStateArgs
+                    {
+                        ControlId=null, ControlName="MULTI_POS_5", State = new { position = 4}
+                    }
+                    });
                     matric.SetButtonProperties(CLIENT_ID, buttonName: "SHIELDS_PERCENT", backgroundcolorOff: GRAY, textcolorOff: YELLOW, text: $@"{ shields}%");
                 }
                 else {
@@ -122,6 +140,12 @@ namespace IntegrationDemo {
             }
 
             //flash critical shields
+            matric.SetControlsState(null, new List<SetControlsStateArgs> {
+                    new SetControlsStateArgs
+                    {
+                        ControlId=null, ControlName="MULTI_POS_5", State = new { position = 2}
+                    }
+                    });
             bool criticalOn = true;
             for (int i = 0; i < 10; i++) {
                 if (criticalOn)
