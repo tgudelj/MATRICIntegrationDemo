@@ -114,6 +114,23 @@ namespace IntegrationDemo {
 
         }
 
+        public static void ParseMessage(string json) {
+            JObject obj = JObject.Parse(json);
+            string messageType = obj.GetValue("MessageType").ToString();
+            switch (messageType) {
+                case "ClientList":
+                    UpdateClientsList(obj.GetValue("MessageData").ToString());
+                    break;
+                case "ControlInteraction":
+                    OnControlInteraction(obj.GetValue("MessageData").ToString());
+                    break;
+            }
+        }
+        public static void OnControlInteraction(string data)
+        {
+            Console.WriteLine("Control interaction:");
+            Console.WriteLine(data);
+        }
 
         public static void UpdateClientsList(string json) {
         JArray connectedClients = (JArray)JsonConvert.DeserializeObject(json);

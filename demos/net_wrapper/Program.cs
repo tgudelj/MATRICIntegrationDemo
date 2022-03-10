@@ -19,12 +19,22 @@ namespace IntegrationDemo {
             //Console.WriteLine("Authorize connection in MATRIC, then enter PIN:");
             //New using integration library
             matric = new Matric.Integration.Matric(CONST.APP_NAME, CONST.PIN, CONST.API_PORT);
+
+ 
             //matric.RequestAuthorizePrompt();
             //PIN = Console.ReadLine();
             matric.PIN = PIN;
             matric.OnConnectedClientsReceived += Matric_OnConnectedClientsReceived;
+            matric.OnControlInteraction += Matric_OnControlInteraction;
             matric.GetConnectedClients();
+           
             Console.ReadLine();
+        }
+
+        private static void Matric_OnControlInteraction(object data)
+        {
+            Console.WriteLine("Control interaction:");
+            Console.WriteLine(data.ToString());
         }
 
         private static void Matric_OnConnectedClientsReceived(object source, List<ClientInfo> clients) {

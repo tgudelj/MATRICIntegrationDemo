@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d84ec5c4-6daa-4131-b2e3-5edadc5d3b32": {
+      "ProjectGuid": "d84ec5c4-6daa-4131-b2e3-5edadc5d3b32",
+      "DisplayName": "IntegrationDemoCSWrapper",
+      "ColorIndex": 0
+    },
+    "99839985-31b8-4fd2-947e-cd66e76046e5": {
+      "ProjectGuid": "99839985-31b8-4fd2-947e-cd66e76046e5",
+      "DisplayName": "DemoRaw",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

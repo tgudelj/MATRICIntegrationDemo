@@ -23,8 +23,12 @@ namespace IntegrationDemo {
             IPEndPoint ep = new IPEndPoint(serverEP.Address, serverEP.Port);
             byte[] receiveBytes = udpClient.EndReceive(ar, ref ep);
             string receiveString = Encoding.ASCII.GetString(receiveBytes);
-            Program.UpdateClientsList(receiveString);
+
+            Program.ParseMessage(receiveString);
+            udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
         }
+
+
 
         /// <summary>
         /// Initiates the connection
