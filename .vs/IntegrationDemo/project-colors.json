@@ -10,6 +10,11 @@
       "ProjectGuid": "99839985-31b8-4fd2-947e-cd66e76046e5",
       "DisplayName": "DemoRaw",
       "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 2
