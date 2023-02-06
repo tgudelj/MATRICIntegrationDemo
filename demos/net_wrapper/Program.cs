@@ -92,6 +92,14 @@ namespace IntegrationDemo {
             matric.SetButtonProperties(CLIENT_ID, backgroundcolorOff: GRAY, buttonName: "BTN_YELLOW");
             matric.SetButtonProperties(CLIENT_ID, backgroundcolorOff: RED, buttonName: "BTN_RED");
             Thread.Sleep(800);
+            matric.SetButtonProperties(CLIENT_ID, fontSize: "10", buttonName: "BTN_GREEN");
+            Thread.Sleep(500);
+            matric.SetButtonProperties(CLIENT_ID, fontSize: "20", buttonName: "BTN_GREEN");
+            Thread.Sleep(500);
+            matric.SetButtonProperties(CLIENT_ID, fontSize: "30", buttonName: "BTN_GREEN");
+            Thread.Sleep(500);
+            matric.SetButtonProperties(CLIENT_ID, fontSize: "40", buttonName: "BTN_GREEN");
+            Thread.Sleep(500);
 
             matric.SetButtonPropertiesEx(null, new List<SetButtonPropsArgsEx> { 
                 new SetButtonPropsArgsEx
