@@ -19,18 +19,18 @@ namespace IntegrationDemo {
             //Console.WriteLine("Authorize connection in MATRIC, then enter PIN:");
             //New using integration library
             matric = new Matric.Integration.Matric(CONST.APP_NAME, CONST.PIN, CONST.API_PORT);
-            
- 
             //matric.RequestAuthorizePrompt();
             //PIN = Console.ReadLine();
             matric.PIN = PIN;
             matric.OnError += Matric_OnError;
             matric.OnConnectedClientsReceived += Matric_OnConnectedClientsReceived;
             matric.OnControlInteraction += Matric_OnControlInteraction;
-            Console.ReadLine();
+            Console.WriteLine("Press any key to start demo");
+            Console.ReadKey();
+            Console.WriteLine("Trying to get connected clients");
             matric.GetConnectedClients();
-           
-            Console.ReadLine();
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
 
         private static void Matric_OnError(Exception ex)
@@ -55,6 +55,40 @@ namespace IntegrationDemo {
             string RED = "red";
             string BLACK = "black";
             string WHITE = "white";
+
+            ServerVariable vString = new ServerVariable() {
+                Name = "demo_string",
+                VariableType = ServerVariable.ServerVariableType.STRING,
+                Value = "Initial string"
+            };
+            ServerVariable vBool = new ServerVariable() {
+                Name = "demo_bool",
+                VariableType = ServerVariable.ServerVariableType.BOOL,
+                Value = true
+            };
+            ServerVariable vNumber = new ServerVariable() {
+                Name = "demo_number",
+                VariableType = ServerVariable.ServerVariableType.NUMBER,
+                Value = 1
+            };
+            ServerVariable vJsonObject = new ServerVariable() {
+                Name = "demo_number",
+                VariableType = ServerVariable.ServerVariableType.JSONOBJECT,
+                Value = @"{""propNumber"":""1"", ""propString"":""Hello from demo""}"
+            };
+
+            List<ServerVariable> variables = new List<ServerVariable>() { 
+                vString, vBool, vNumber, vJsonObject
+            };
+
+            matric.SetVariables(variables);
+            Thread.Sleep(5000);
+            vString.Value = "New value...";
+            vBool.Value = !((bool)vBool.Value);
+            vNumber.Value = ((int)vNumber.Value) + 1;
+            vJsonObject.Value = @"{""propNumber"":""999"", ""propString"":""Is it working?""}";
+            matric.SetVariables(variables);
+            Thread.Sleep(5000);
 
             matric.SetDeck(CLIENT_ID, DEMO_DECK_ID, DemoPages.SEMAPHORE);
             Thread.Sleep(800);

@@ -5,7 +5,7 @@ namespace IntegrationDemo {
         public static string DEMO_DECK_ID = "7f18056c-7a2a-46ac-9956-662e7d0b78ec";
         public static string SMILE_WINK = "😉";
         public static string APP_NAME = "MATRIC Integration Demo";
-        public static int API_PORT = 5300;
+        public static int API_PORT = 50300;
         public static string PIN = "0450";
     }
 
