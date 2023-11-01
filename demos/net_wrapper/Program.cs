@@ -25,6 +25,7 @@ namespace IntegrationDemo {
             matric.OnError += Matric_OnError;
             matric.OnConnectedClientsReceived += Matric_OnConnectedClientsReceived;
             matric.OnControlInteraction += Matric_OnControlInteraction;
+            matric.OnVariablesChanged += Matric_OnVariablesChanged;
             Console.WriteLine("Press any key to start demo");
             Console.ReadKey();
             Console.WriteLine("Trying to get connected clients");
@@ -33,12 +34,19 @@ namespace IntegrationDemo {
             Console.ReadKey();
         }
 
+        private static void Matric_OnVariablesChanged(object sender, ServerVariablesChangedEventArgs data) {
+            Console.WriteLine("Server variables changed");
+            foreach (string varName in data.ChangedVariables) {
+                Console.WriteLine($"{varName}: {data.Variables[varName]}");
+            }
+        }
+
         private static void Matric_OnError(Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
 
-        private static void Matric_OnControlInteraction(object data)
+        private static void Matric_OnControlInteraction(object sender, object data)
         {
             Console.WriteLine("Control interaction:");
             Console.WriteLine(data.ToString());
