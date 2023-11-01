@@ -37,7 +37,7 @@ namespace IntegrationDemo {
         private static void Matric_OnVariablesChanged(object sender, ServerVariablesChangedEventArgs data) {
             Console.WriteLine("Server variables changed");
             foreach (string varName in data.ChangedVariables) {
-                Console.WriteLine($"{varName}: {data.Variables[varName]}");
+                Console.WriteLine($"{varName}: {data.Variables[varName].Value}");
             }
         }
 
