@@ -6,7 +6,7 @@ try {
     New-Item -ItemType Directory -Path $testDirectory | Out-Null
     $compiler = & (Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe') -latest -products '*' -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\Roslyn\csc.exe' | Select-Object -First 1
     if (!$compiler) { throw 'Visual Studio C# compiler was not found.' }
-    $json = Join-Path $repo 'packages/Newtonsoft.Json.13.0.1/lib/net45/Newtonsoft.Json.dll'
+    $json = Join-Path $repo 'packages/Newtonsoft.Json.13.0.4/lib/net45/Newtonsoft.Json.dll'
     $runner = Join-Path $testDirectory 'DemoChecks.exe'
     & $compiler /nologo /target:exe "/out:$runner" "/reference:$json" (Join-Path $repo 'DemoCommon.cs') (Join-Path $repo 'demos/raw/DemoIntegrationHelper.cs') (Join-Path $PSScriptRoot 'DemoChecks.cs')
     if ($LASTEXITCODE) { throw 'Demo checks compilation failed.' }

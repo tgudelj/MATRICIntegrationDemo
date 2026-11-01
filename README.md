@@ -343,7 +343,7 @@ Event names and `Data` depend on control type. Use the supplied device, deck, pa
 
 The bundled SDK is in [demos/net_wrapper/lib](demos/net_wrapper/lib). It was refreshed from MATRIC's `Integration/MatricIntegrationLib` source with `ClientInfo.CurrentDeckId` support, built as `Release|AnyCPU` for .NET Framework 4.8. Its assembly version remains `2.8.1.0`; that version alone does not identify the refreshed binary.
 
-The DLL's SHA-256 is `C92A367B54DE08865260AA9ECB8C1988837E9B3BBB75332847AA75028530400D`. The adjacent PDB matches this build. The wrapper project also references Newtonsoft.Json through NuGet.
+The DLL's SHA-256 is `C92A367B54DE08865260AA9ECB8C1988837E9B3BBB75332847AA75028530400D`. The adjacent PDB matches this build. Both demo projects and the regression checks use Newtonsoft.Json 13.0.4 through NuGet, compatible with their .NET Framework 4.8 target.
 
 The SDK exposes `GetConnectedClients`, `SetDeck`, `SetActivePage`, `SetButtonProperties`, `SetButtonPropertiesEx`, `SetButtonsVisualState`, `SetControlsState`, and `SetVariables`. Subscribe to `OnConnectedClientsReceived`, `OnControlInteraction`, `OnVariablesChanged`, and `OnError` before issuing requests. `OnControlInteraction` supplies the inner payload as a JSON string; the other data callbacks provide typed objects.
 
