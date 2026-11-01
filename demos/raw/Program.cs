@@ -8,22 +8,37 @@ using static IntegrationDemo.DemoIntegrationHelper;
 namespace IntegrationDemo {
 
 
+    /// <summary>Runs the demonstration on one selected device while UDP callbacks continue receiving events.</summary>
     class Program {
         public static string DEMO_DECK_ID = CONST.DEMO_DECK_ID;
         public static string PIN = CONST.PIN;
         public static string CLIENT_ID;
         public static DemoIntegrationHelper mtrx;
-        static void Main(string[] args)
-        {
+        private static DemoSession session;
+
+        /// <summary>Owns the receiver and foreground animation; Ctrl+C cancels waits and releases the socket.</summary>
+        static int Main(string[] args) {
             Console.Title = "MATRIC Integration Demo";
-            mtrx = new DemoIntegrationHelper();
-            Console.WriteLine("Authorize connection in MATRIC, then enter PIN:");
-            //mtrx.Connect();
-            //PIN = Console.ReadLine();
-            mtrx.GetConnectedClients();
-            Console.ReadLine();
+            using (var cancellation = new CancellationTokenSource()) {
+                ConsoleCancelEventHandler cancel = (sender, eventArgs) => { eventArgs.Cancel = true; cancellation.Cancel(); };
+                Console.CancelKeyPress += cancel;
+                try {
+                    var options = DemoOptions.Parse(args);
+                    using (session = new DemoSession(options, cancellation.Token))
+                    using (mtrx = new DemoIntegrationHelper(ParseMessage, error => Console.Error.WriteLine(error.Message), options.ApiPort, options.ListenerPort)) {
+                        // PIN configuration is intentionally unchanged; no interactive authorization is introduced here.
+                        mtrx.PIN = PIN;
+                        CLIENT_ID = session.SelectClient(mtrx.GetConnectedClients);
+                        StartDemo();
+                    }
+                    return 0;
+                } catch (OperationCanceledException) { Console.WriteLine("Demo cancelled."); return 130; }
+                catch (Exception error) { Console.Error.WriteLine(error.Message); return 1; }
+                finally { Console.CancelKeyPress -= cancel; }
+            }
         }
 
+        /// <summary>Demonstrates temporary appearances and state; pacing delays are not command acknowledgements.</summary>
         private static void StartDemo() {
             string GRAY = "#111111";
             string YELLOW = "yellow";
@@ -33,10 +48,10 @@ namespace IntegrationDemo {
             string WHITE = "white";
 
             mtrx.SetDeck(CLIENT_ID, DEMO_DECK_ID, DemoPages.SEMAPHORE);
-            Thread.Sleep(800);
+            session.WaitForDeck(mtrx.GetConnectedClients, CLIENT_ID, DEMO_DECK_ID);
 
             List<VisualStateItem> listOn = new List<VisualStateItem>();
-            //we will refer to the buttons by name rather then id
+            // Names identify controls within the selected device's loaded deck.
             listOn.Add(new VisualStateItem(null, "on", buttonName: "BTN_GREEN"));
             listOn.Add(new VisualStateItem(null, "on", buttonName: "BTN_YELLOW"));
             listOn.Add(new VisualStateItem(null, "on", buttonName: "BTN_RED"));
@@ -47,32 +62,32 @@ namespace IntegrationDemo {
             listOff.Add(new VisualStateItem(null, "off", buttonName: "BTN_RED"));
 
             mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
-            Thread.Sleep(800);
+            session.Delay(800);
             mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
-            Thread.Sleep(800);
+            session.Delay(800);
             mtrx.SetButtonsVisualState(CLIENT_ID, listOn);
-            Thread.Sleep(800);
+            session.Delay(800);
             mtrx.SetButtonsVisualState(CLIENT_ID, listOff);
-            Thread.Sleep(800);          
+            session.Delay(800);
 
             mtrx.SetButtonProperties(CLIENT_ID, "BTN_GREEN", backgroundcolorOff: GREEN);
-            Thread.Sleep(800);
+            session.Delay(800);
             mtrx.SetButtonProperties(CLIENT_ID, "BTN_GREEN", backgroundcolorOff: GRAY);
             mtrx.SetButtonProperties(CLIENT_ID, "BTN_YELLOW", backgroundcolorOff: YELLOW);
-            Thread.Sleep(800);
+            session.Delay(800);
             mtrx.SetButtonProperties(CLIENT_ID, "BTN_GREEN", backgroundcolorOff: GRAY);
             mtrx.SetButtonProperties(CLIENT_ID, "BTN_YELLOW", backgroundcolorOff: GRAY);
             mtrx.SetButtonProperties(CLIENT_ID, "BTN_RED", backgroundcolorOff: RED);
-            Thread.Sleep(1000);
+            session.Delay(1000);
 
             mtrx.SetActivePage(CLIENT_ID, DemoPages.SHIELDS_AND_WEAPONS);
-            Thread.Sleep(1500);
+            session.Delay(1500);
             //simulate battle
             int ammo = 500;
             int shields = 100;
             for (int i = 0; i < 100; i++) {
                 mtrx.SetControlsState(CLIENT_ID, new List<SetControlStateItem> {
-                        new SetControlStateItem(null, $"{{value: {shields}}}", "SHIELDS_SLIDER")
+                        new SetControlStateItem(null, new { value = shields }, "SHIELDS_SLIDER")
                     });
                 if (shields < 30)
                 {
@@ -89,7 +104,7 @@ namespace IntegrationDemo {
                 mtrx.SetButtonProperties(CLIENT_ID, "AMMO_COUNT", backgroundcolorOff: GRAY, textcolorOff: WHITE, text: $@"{ammo}");
                 shields--;
                 ammo = ammo -5;
-                Thread.Sleep(100);
+                session.Delay(100);
             }
 
             //flash critical shields
@@ -103,17 +118,18 @@ namespace IntegrationDemo {
                     mtrx.SetButtonProperties(CLIENT_ID, "SHIELDS_CRITICAL", textcolorOff: GRAY, backgroundcolorOff: RED);
                 }
                 criticalOn = !criticalOn;
-                Thread.Sleep(400);
+                session.Delay(400);
             }
 
             mtrx.SetActivePage(CLIENT_ID, DemoPages.DEMO_COMPLETE);
-            Thread.Sleep(1000);
+            session.Delay(1000);
             mtrx.SetButtonProperties(CLIENT_ID, "WINK_BUTTON", text: CONST.SMILE_WINK);
             Console.WriteLine("Demo complete");
-            //mtrx.SetDeck(CLIENT_ID, DEMO_DECK_ID, DemoPages.SEMAPHORE);
+
 
         }
 
+        /// <summary>Decodes the legacy envelope and dispatches notifications without blocking the receiver.</summary>
         public static void ParseMessage(string json) {
             JObject obj = JObject.Parse(json);
             string messageType = obj.GetValue("MessageType").ToString();
@@ -121,33 +137,24 @@ namespace IntegrationDemo {
                 case "ClientList":
                     UpdateClientsList(obj.GetValue("MessageData").ToString());
                     break;
+                case "VariablesChange":
+                    Console.WriteLine("Server variables changed: " + obj.GetValue("MessageData"));
+                    break;
                 case "ControlInteraction":
                     OnControlInteraction(obj.GetValue("MessageData").ToString());
                     break;
             }
         }
+        /// <summary>Displays control events while the foreground animation continues.</summary>
         public static void OnControlInteraction(string data)
         {
             Console.WriteLine("Control interaction:");
             Console.WriteLine(data);
         }
 
+        /// <summary>Publishes a snapshot without starting or restarting the demo on the receive callback.</summary>
         public static void UpdateClientsList(string json) {
-        JArray connectedClients = (JArray)JsonConvert.DeserializeObject(json);
-        if (connectedClients.Count == 0)
-        {
-            Console.WriteLine("No connected devices found, make sure your smartphone/tablet is connected\nPress any key to exit");
-            Console.ReadKey();
-            Environment.Exit(0);
-        }
-        Console.WriteLine("Found devices:");
-        foreach (JObject client in connectedClients)
-        {
-            Console.WriteLine($@"{client.GetValue("Hash")} {client.GetValue("Name")}");                
-        }
-            CLIENT_ID = ((JObject)connectedClients[0]).GetValue("clientId").ToString();
-            Console.WriteLine("Starting demo on first device");
-            StartDemo();
+            session.PublishClients(JArray.Parse(json));
         }
     }
 }

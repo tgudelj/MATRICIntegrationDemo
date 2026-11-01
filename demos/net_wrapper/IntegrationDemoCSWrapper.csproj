@@ -54,7 +54,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MatricIntegration, Version=2.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="MatricIntegration, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\MatricIntegration.dll</HintPath>
     </Reference>
